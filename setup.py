@@ -7,5 +7,5 @@ setup(
     version = '0.2',
     packages=['cuckoo2mist'],
     # Metadata
-    author = 'Philipp Trinius'
+    author = 'Philipp Trinius', install_requires=['ujson']
 )
