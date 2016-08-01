@@ -43,7 +43,7 @@ def split(p):
     d, p = splitdrive(p)
     i = len(p)
     while i and p[i - 1] not in '/\\':
-        i = i - 1
+        i -= 1
     head, tail = p[:i], p[i:]  # now tail has no slashes
     # remove trailing slashes from head, unless it's all slashes
     head2 = head
@@ -114,7 +114,7 @@ def splitWindows(value):
     else:
         result['extension'] = extension[1:]
         result['parameter'] = value[pos:].replace('  ', ' ')
-    #	print result['extension']
+    # print result['extension']
     #	print result['parameter']
     return result
 

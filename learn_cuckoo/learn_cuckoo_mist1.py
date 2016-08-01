@@ -1,7 +1,7 @@
 #!/bin/python
 
 import gzip
-import json
+import ujson
 import os
 import sys
 import xml.etree.ElementTree as ET
@@ -17,14 +17,14 @@ def run_parser(folder):
             report = os.path.join(top, nm)
             i += 1
             if i % 1 == 0:
-                print "Processing report number %i" % i
+                print("Processing report number %i" % i)
 
             if report.endswith(".gz"):
                 with gzip.GzipFile(report, 'r') as fp:
-                    jo = json.load(fp)
+                    jo = ujson.load(fp)
             else:
                 with open(report, 'r') as fp:
-                    jo = json.load(fp)
+                    jo = ujson.load(fp)
 
             procs = jo['behavior']['processes']
             for proc in procs:
@@ -62,7 +62,7 @@ def main():
             tree = run_parser(input_dir)
             tree.write(sys.argv[2])
         else:
-            print "Folder provided does not exists "
+            print("Folder provided does not exists ")
             sys.exit()
     except:
         raise

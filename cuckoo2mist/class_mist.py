@@ -23,20 +23,20 @@ this program; if not, see <http://www.gnu.org/licenses/>
 __author__ = "philipp trinius"
 __version__ = "0.2"
 
-import os
-import sys
-import re
-import xml.etree.cElementTree as ET
-import mistSplit as mysplit
-from cStringIO import StringIO
 import gzip
 import json
+import os
+import re
+import sys
+import xml.etree.cElementTree as ET
+
+from io import StringIO
 
 
 class mistit(object):
     def __init__(self, input_file, elements2mist, types2mist):
         self.infile = input_file
-        print 'Generating MIST report for "%s"...' % self.infile
+        print('Generating MIST report for "%s"...' % self.infile)
         self.skiplist = []
 
         self.ip_pattern = re.compile('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
@@ -68,7 +68,7 @@ class mistit(object):
         try:
             self.behaviour_report = self.read_report(self.infile)
             return True
-        except Exception, e:
+        except Exception as e:
             self.errormsg = 'Could not parse the behaviour report. (%s)' % e
             return False
 
@@ -77,11 +77,11 @@ class mistit(object):
 
     def write(self, outputfile):
         try:
-            w_file = file(outputfile, 'w')
-            w_file.write(self.result())
-            w_file.flush()
-            w_file.close()
-        except Exception, e:
+            with open(outputfile, 'w') as w_file:
+                w_file.write(self.result())
+                w_file.flush()
+                w_file.close()
+        except Exception as e:
             self.errormsg = e
             return False
         return True
@@ -261,6 +261,6 @@ if __name__ == '__main__':
     if x.parse() and x.convert():
         x.write(sys.argv[2].replace("json", "mist"))
     else:
-        print x.errormsg
+        print(x.errormsg)
     for l in sorted(x.missingApi):
-        print l
+        print(l)

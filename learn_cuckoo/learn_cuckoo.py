@@ -148,7 +148,7 @@ def run_parser(folder):
 
                     report = os.path.join(top, nm)
                     i += 1
-                    print "Processing report number %i (%s) \n" % (i, report)
+                    print("Processing report number %i (%s) \n" % (i, report))
 
                     fp = open(report, 'r')
                     jo = json.load(fp)
@@ -202,7 +202,7 @@ def main():
             if os.path.exists(arguments.file):
                 run_parser(arguments.file)    
             else:
-                print "Folder provided does not exists "
+                print("Folder provided does not exists ")
                 sys.exit()
     except:
         raise
