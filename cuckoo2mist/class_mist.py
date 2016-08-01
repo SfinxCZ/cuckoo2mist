@@ -24,7 +24,7 @@ __author__ = "philipp trinius"
 __version__ = "0.2"
 
 import gzip
-import json
+import ujson
 import os
 import re
 import sys
@@ -50,15 +50,15 @@ class mistit(object):
         self.behaviour_report = {}
 
     def set_report(self, report_data):
-        return json.loads(report_data)
+        return ujson.loads(report_data)
 
     def read_report(self, freport):
         if freport.endswith(".gz"):
             with gzip.GzipFile(freport, 'r') as f:
-                data = json.load(f)
+                data = ujson.load(f)
         else:
             with open(freport, 'r') as f:
-                data = json.load(f)
+                data = ujson.load(f)
         return data
 
     def parse(self):

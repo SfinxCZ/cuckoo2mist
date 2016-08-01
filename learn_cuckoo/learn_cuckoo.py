@@ -25,15 +25,12 @@ version 0.2 : Edited by Paolo Di Prodi on 2013-11-13; Progress Bar inserted.
 """
 
 __author__ = "philipp trinius"
-__version__ = "0.2"  
+__version__ = "0.2"
 
-
-import os
-import json
-import sys
-import re
-import glob
 import argparse
+import os
+import sys
+import ujson
 
 
 class progressBar:
@@ -187,9 +184,9 @@ def run_parser(folder):
                                             learn_reports[sortCalls[item][0]][
                                                 sortCalls[item][1]][arg['name']][arg['value']] = 1
                     k = i % 10
-                    json.dump(learn_reports, open(
+                    ujson.dump(learn_reports, open(
                         str(k) + "_learned_from_reports.json", 'wb'))
-                    json.dump(learn_reports, open(
+                    ujson.dump(learn_reports, open(
                         str(k) + "_learned_from_reports_pretty.json", 'wb'), sort_keys=False,indent=4, separators=(',', ': '))
             except KeyboardInterrupt:
                 print("Interrupted scan processed %d " % i)

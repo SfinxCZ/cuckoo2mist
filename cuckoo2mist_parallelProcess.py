@@ -6,10 +6,12 @@ from cuckoo2mist import class_mist
 
 config = "./conf"
 
+
 def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in range(0, len(l), n):
-        yield l[i:i+n]
+        yield l[i:i + n]
+
 
 def process(reports):
     global config
@@ -19,9 +21,6 @@ def process(reports):
         x = class_mist.mistit(report, elements2mist, types2mist)
         if x.parse() and x.convert():
             x.write(report.replace("json.gz", "mist"))
-
-
-
 
 
 def main(folder):
@@ -34,6 +33,7 @@ def main(folder):
     pool = processPool.Pool()
     reports_separated = chunks(reports, 100)
     pool.map(process, reports_separated)
+
 
 if __name__ == "__main__":
     main(sys.argv[2])
